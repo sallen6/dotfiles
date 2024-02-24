@@ -12,7 +12,8 @@
 	brD = branch -D
 	merged = branch --merged
 	st = status
-	aa = add -A .
+    aa = add -A .
+    ap = add -p .
 	cm = commit -m
 	aacm = !git add -A . && git commit -m
 	cp = cherry-pick
