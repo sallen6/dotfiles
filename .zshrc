@@ -1,14 +1,20 @@
 # Set up the prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+zstyle ':vcs_info:git:*' formats '%b '
+
+setopt PROMPT_SUBST
+PROMPT='%F{green}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f$ '
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
+# Use vi keybindings
 bindkey -v
+
+# Set editor to vim
 export EDITOR=vim
+
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
@@ -37,5 +43,11 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 autoload zmv
+
+# Aliases
 alias zcp='zmv -C' zln='zmv -L'
+alias ls='ls --color=auto'
+alias la='ls -A --color=auto'
+alias please='sudo !!'
+alias grep='grep --color=auto'
 
