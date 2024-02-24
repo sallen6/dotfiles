@@ -7,10 +7,10 @@ zstyle ':vcs_info:git:*' actionformats "%b "
 setopt PROMPT_SUBST
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     # SSH session: Include hostname in the prompt
-    PROMPT='%F{green}%*%f %F{blue}%m %F{yellow}%1~ %f${vcs_info_msg_0_}%f%# '
+    PROMPT='%F{green}%*%f %F{yellow}%1~ %F{red}${vcs_info_msg_0_}%f%# '
 else
     # Non-SSH session: Exclude hostname from the prompt
-    PROMPT='%F{green}%*%f %F{blue}%1~ %f${vcs_info_msg_0_}%f%# '
+    PROMPT='%F{green}%*%f %F{blue}%m %F{yellow}%1~ %F{red}${vcs_info_msg_0_}%f%# '
 fi
 
 setopt histignorealldups sharehistory
