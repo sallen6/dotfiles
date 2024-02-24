@@ -161,7 +161,10 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+set relativenumber "Relative line numbers
 
+" Line number styling
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
