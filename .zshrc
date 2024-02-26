@@ -20,7 +20,7 @@ precmd () {
 
     setopt PROMPT_SUBST
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        PROMPT='%F{cyan}%*%f %F{blue}%m %F{yellow}${(%):-%~} %F{'$VCS_COLOR'}${vcs_info_msg_0_}%f%# '
+        PROMPT='%F{cyan}%*%f %F{magenta}%m %F{yellow}${(%):-%~} %F{'$VCS_COLOR'}${vcs_info_msg_0_}%f%# '
     else
         PROMPT='%F{cyan}%*%f %F{yellow}${(%):-%~} %F{'$VCS_COLOR'}${vcs_info_msg_0_}%f%# '
     fi
