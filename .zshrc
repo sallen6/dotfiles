@@ -1,17 +1,30 @@
 # Set up the prompt
-autoload -Uz vcs_info
-precmd() { vcs_info }
-
-zstyle ':vcs_info:git:*' actionformats "%b " 
 
 setopt PROMPT_SUBST
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    # SSH session: Include hostname in the prompt
-    PROMPT='%F{green}%*%f %F{blue}%m %F{yellow}${(%):-%~} %F{red}${vcs_info_msg_0_}%f%# '
-else
-    # Non-SSH session: Exclude hostname from the prompt
-    PROMPT='%F{green}%*%f %F{yellow}${(%):-%~} %F{red}${vcs_info_msg_0_}%f%# '
-fi
+autoload -Uz vcs_info # Include version control in prompt if available
+
+zstyle ':vcs_info:git:*' formats '%b '
+
+precmd () {
+    vcs_info
+    if [[ -n ${vcs_info_msg_0_} ]]; then
+        STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
+        if [[ -n $STATUS ]]; then
+            VCS_COLOR='red'
+        else
+            VCS_COLOR='green'
+        fi
+    else
+        VCS_COLOR='red'
+    fi
+
+    setopt PROMPT_SUBST
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        PROMPT='%F{cyan}%*%f %F{blue}%m %F{yellow}${(%):-%~} %F{'$VCS_COLOR'}${vcs_info_msg_0_}%f%# '
+    else
+        PROMPT='%F{cyan}%*%f %F{yellow}${(%):-%~} %F{'$VCS_COLOR'}${vcs_info_msg_0_}%f%# '
+    fi
+}
 
 setopt histignorealldups sharehistory
 
