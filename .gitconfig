@@ -5,6 +5,8 @@
         name = sallen6
 [init]
         defaultBranch = main
+[pull]
+        rebase = true
 [alias]
 	co = checkout
 	cob = checkout -b
